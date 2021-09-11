@@ -3,14 +3,15 @@ import json
 from dotenv import load_dotenv
 import os
 
+# Loads the .env file
 load_dotenv()
 
 # Gets the API key from .env file
 api_key = os.getenv("GOOGLE_GEOCODE_API_KEY")
 
 if api_key is False or api_key is None:
-  print("please check the api key")
-  url = "https://google.com"
+  print("Please check the api key!")
+  quit()
 else: 
   url = "https://maps.googleapis.com/maps/api/geocode/json?"
 
