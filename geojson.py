@@ -13,7 +13,7 @@ if api_key is False or api_key is None:
   print("Please check the api key!")
   quit()
 else: 
-  url = "https://maps.googleapis.com/maps/api/geocode/json?"
+  service_url = "https://maps.googleapis.com/maps/api/geocode/json?"
 
 while True:
   address = input("Enter location: ")
@@ -25,31 +25,38 @@ while True:
   params["key"] = api_key
 
   # urlencode() converts an object of key-value pairs to a percent-encoded ASCII test strings.
-  url += urllib.parse.urlencode(params)
+  url = service_url + urllib.parse.urlencode(params)
 
   # Shows the url
   print("Retrieving", url)
 
   # Sends a GET request
   u_handle = urllib.request.urlopen(url)
-  data = u_handle.read().decode()
+  json_data = u_handle.read().decode()
 
-  # Load the json data
+  print(json_data)
+
+  # Load the json_data
   try:
-    json_data = json.loads(data)
+    data = json.loads(json_data)
   except:
-    json_data = None
+    data = None
 
-  if json_data is None or json_data["status"] != "OK":
+  if data is None or data["status"] != "OK":
     print("Failure to Retrieve Location")
     print(data)
     continue
 
   # the json has two keys "results" & "status"
-  print(f"Status: {json_data['status']}")
+  print(f"Status: {data['status']}")
 
-  street_add = json_data["results"][0]["formatted_address"]
-  coords = json_data["results"][0]["geometry"]["location"]
+  street_add = data["results"][0]["formatted_address"]
+  coords = data["results"][0]["geometry"]["location"]
 
   print(f"Street Address: {street_add}")
   print(f"Coords: {coords}")
+
+  add_comps = data["results"][0]["address_components"]
+  country_code = add_comps[len(add_comps) - 1]["short_name"]
+
+  print(f"Country Code: {country_code}")
