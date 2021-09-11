@@ -1,0 +1,1 @@
+Just a simple python program that utilizes the Google Maps API to retrieve geocode of a given location.
