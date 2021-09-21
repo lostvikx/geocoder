@@ -1,5 +1,11 @@
 # GeoCoder
 
+## How to use
+```
+Enter location: Mumbai, India
+```
+
+
 Going through and registering for the Google API developer program is an excruciating and painful task.
 
 Although, their services are super cool.
