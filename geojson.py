@@ -15,6 +15,8 @@ if api_key is False or api_key is None:
 else: 
   service_url = "https://maps.googleapis.com/maps/api/geocode/json?"
 
+print("Welcome to GeoCoder!")
+
 while True:
   address = input("Enter location: ")
   if len(address) < 1 or address == "q": break
